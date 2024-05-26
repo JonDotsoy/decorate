@@ -1,0 +1,33 @@
+{
+  "name": "@jondotsoy/decorate",
+  "version": "0.1.2",
+  "description": "decorate any function",
+  "main": "./lib/cjs/decorate.js",
+  "module": "./lib/esm/decorate.js",
+  "types": "./lib/types/decorate.d.ts",
+  "exports": {
+    "import": "./lib/esm/decorate.js",
+    "require": "./lib/cjs/decorate.js",
+    "default": "./lib/cjs/decorate.js",
+    "types": "./lib/types/decorate.d.ts"
+  },
+  "type": "module",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prettier": "^3.2.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "fmt": "prettier -w ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JonDotsoy/decorate.git"
+  }
+}

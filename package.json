@@ -1,6 +1,6 @@
 {
   "name": "@jondotsoy/decorate",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "decorate any function",
   "main": "./lib/cjs/decorate.js",
   "module": "./lib/esm/decorate.js",
@@ -24,6 +24,7 @@
     "lib"
   ],
   "scripts": {
+    "prepack": "make build",
     "fmt": "prettier -w ."
   },
   "repository": {

@@ -1,6 +1,6 @@
 {
   "name": "@jondotsoy/decorate",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "decorate any function",
   "main": "./lib/cjs/decorate.js",
   "module": "./lib/esm/decorate.js",

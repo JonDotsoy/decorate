@@ -1,8 +1,7 @@
-type Promised<R> = R | Promise<R>;
-export type Descriptor<A extends any[], R> = (...args: A) => Promised<R>;
+export type Descriptor<A extends any[], R> = (...args: A) => R;
 export type Decorator<TDecorator extends Descriptor<any, any>> = (
   descriptor: TDecorator,
-) => Promised<TDecorator>;
+) => TDecorator;
 
 export type DescriptorSync<A extends any[], R, ThisArg = any> = (
   this: ThisArg,
@@ -27,16 +26,11 @@ export const decorate = <
   descriptor: TDescriptor,
   ...decorators: TDecorator[]
 ): TDescriptor => {
-  const f: any = function (this: any, ...args: any[]) {
-    const newDescriptor = decorators.reduce<any>(
-      (descriptor: TDescriptor, decorator: TDecorator) =>
-        async (...args: any) =>
-          (await decorator.call(this, descriptor)).call(this, ...args),
-      descriptor.bind(this),
-    );
-    return newDescriptor(...args);
-  };
-  return f;
+  return decorators.reduce(
+    (descriptor: TDescriptor, decorator: TDecorator): TDescriptor =>
+      decorator(descriptor),
+    descriptor,
+  );
 };
 
 /**
@@ -46,6 +40,7 @@ export const decorate = <
  * @param descriptor
  * @param decorators
  * @returns a new descriptor wrapped
+ * @deprecated use `decorate` instead
  */
 export const decorateSync = <
   TDescriptorSync extends DescriptorSync<any[], any, any>,

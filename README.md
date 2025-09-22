@@ -1,10 +1,6 @@
-# decorate
+# 🎭 decorate
 
-A powerful TypeScript library for functional composition and decoration of functions with support for asynchtype RequestHandler = Descriptor<
-[{ url: string; body: any }],
-Promise<{ status: number; data: any }>
-
-> ;us operations.
+A powerful TypeScript library for functional composition and decoration of functions with support for asynchronous operations.
 
 ## Overview
 
@@ -122,19 +118,18 @@ console.log(calc.calculate(5)); // Logs and returns 15
 ```ts
 import { decorate, type Descriptor, type Decorator } from "@jondotsoy/decorate";
 
-type RequestHandler = Descriptor<busca
+type RequestHandler = Descriptor<
   [{ url: string; body: any }],
-  { status: number; data: any }
+  Promise<{ status: number; data: any }>
 >;
 
 // Authentication middleware - decorator doesn't return a promise
-const authenticate: Decorator<RequestHandler> =
-  (descriptor) => async (req) => {
-    if (!req.headers?.authorization) {
-      return { status: 401, data: { error: "Unauthorized" } };
-    }
-    return descriptor(req);
-  };
+const authenticate: Decorator<RequestHandler> = (descriptor) => async (req) => {
+  if (!req.body?.headers?.authorization) {
+    return { status: 401, data: { error: "Unauthorized" } };
+  }
+  return descriptor(req);
+};
 
 // Logging middleware - decorator doesn't return a promise
 const logger: Decorator<RequestHandler> = (descriptor) => async (req) => {
@@ -145,11 +140,10 @@ const logger: Decorator<RequestHandler> = (descriptor) => async (req) => {
 };
 
 // Rate limiting middleware - decorator doesn't return a promise
-const rateLimit: Decorator<RequestHandler> =
-  (descriptor) => async (req) => {
-    // Rate limiting logic here...
-    return descriptor(req);
-  };
+const rateLimit: Decorator<RequestHandler> = (descriptor) => async (req) => {
+  // Rate limiting logic here...
+  return descriptor(req);
+};
 
 // Build the handler
 const apiHandler = decorate(
